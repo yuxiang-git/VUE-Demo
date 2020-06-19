@@ -68,8 +68,19 @@ export default {
           //登陆成功
           // console.log(this.form.phone)
            var datas=this.form;
-           console.info(datas)
-           _this.$router.push('/Index');
+
+          this.$http.post(('/api/employee/insert'),datas,{emulateJSON:false}).then(response => {
+            // console.log(response.body);
+            this.grouplist = response.body;
+            alert("提交成功！")
+            console.info(datas)
+            _this.$router.push('/Index');
+          }, response => {
+            console.log(response);
+            alert("出问题啦！")
+          });
+
+
         } else {
           //登录失败
           alert('登录失败');
